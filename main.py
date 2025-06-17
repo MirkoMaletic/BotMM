@@ -1,6 +1,9 @@
+import sys
+if sys.version_info >= (3, 13):
+    raise RuntimeError("⛔ Python 3.13 detected — imghdr will break telegram bot. Use Python 3.11 instead.")
+
 try:
     import imghdr
-print("✅ PYTHON VERSION:", __import__("sys").version)
 except ImportError:
     imghdr = None
 
