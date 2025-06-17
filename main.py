@@ -112,7 +112,7 @@ def keep_alive():
     while True:
             requests.get(WEBHOOK_URL)
             print("Ping error:", e)
-        time.sleep(600)
+    time.sleep(600)
 
 dispatcher.add_handler(CommandHandler("start_live", start_live))
 dispatcher.add_handler(CommandHandler("pause", pause))
