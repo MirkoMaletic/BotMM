@@ -1,7 +1,5 @@
 try:
-    import imghdr
 except ImportError:
-    from imghdr_replacement import imghdr
 
 import os
 import json
