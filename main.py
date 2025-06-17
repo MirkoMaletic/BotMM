@@ -1,5 +1,8 @@
 try:
+    import imghdr
 except ImportError:
+    imghdr = None
+
 
 import os
 import json
@@ -46,9 +49,7 @@ def save_state():
         json.dump(state, f, indent=4)
 
 def send(msg):
-    try:
         bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=msg)
-    except Exception as e:
         print("Telegram error:", e)
 
 @app.route("/")
@@ -93,7 +94,6 @@ def daily_report():
     while True:
         now = datetime.utcnow()
         if now.hour == DAILY_REPORT_HOUR and now.minute < 2:
-            try:
                 if os.path.exists(LOG_FILE):
                     df = pd.read_csv(LOG_FILE)
                     df["timestamp"] = pd.to_datetime(df["timestamp"])
@@ -104,16 +104,13 @@ def daily_report():
                     send(f"🧾 Dnevni izveštaj\n📈 Ulaza: {len(df_today)}\n✅ Dobitaka: {wins} ❌ Gubitaka: {losses}\n💰 PnL: {profit:.2f} USDT")
                 else:
                     send("🧾 Nema podataka za današnji dan.")
-            except Exception as e:
                 print("Report error:", e)
             time.sleep(120)
         time.sleep(30)
 
 def keep_alive():
     while True:
-        try:
             requests.get(WEBHOOK_URL)
-        except Exception as e:
             print("Ping error:", e)
         time.sleep(600)
 
