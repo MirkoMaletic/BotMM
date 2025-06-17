@@ -1,5 +1,6 @@
 try:
     import imghdr
+print("✅ PYTHON VERSION:", __import__("sys").version)
 except ImportError:
     imghdr = None
 
