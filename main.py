@@ -105,7 +105,7 @@ def daily_report():
                 else:
                     send("🧾 Nema podataka za današnji dan.")
                 print("Report error:", e)
-            time.sleep(120)
+    time.sleep(120)
         time.sleep(30)
 
 def keep_alive():
